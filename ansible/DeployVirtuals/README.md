@@ -4,7 +4,7 @@ Deploy a virtual server that will re-direct HTTP requests to HTTPS using an iRul
 
 # Pre-requisites
 
-<<Provide link to proivioner and lab inventory file to let user know how to get the BIG-IP and VIP info etc>> and specify that is what we are usinf for the environment
+<< Provide link to proivioner and lab inventory file to let user know how to get the BIG-IP and VIP info etc >> and specify that is what we are using for the environment
 
 # Solution
 
