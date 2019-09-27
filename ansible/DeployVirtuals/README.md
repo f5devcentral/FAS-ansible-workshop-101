@@ -85,7 +85,7 @@ We are deploying the following
 ```
 
 # Testing the solution
-<<GIVE screen shots>>
+<<  GIVE screen shots  >>
 
 - Login to BIG-IP "<< >>" check the configuration deployed
 - Access the application on VIP "<< >>:443"
