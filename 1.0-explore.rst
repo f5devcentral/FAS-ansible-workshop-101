@@ -115,8 +115,7 @@ In the above output every ``[ ]`` defines a group. For example
 
    A group called **all** always exists and contains all groups and hosts defined within an inventory.
 
-We can associate variables to groups and hosts. Host variables are
-declared/defined on the same line as the host themselves. For example
+We can associate variables to groups and hosts. Host variables are declared/defined on the same line as the host themselves. For example
 for the host ``f5``:
 
 .. code::
