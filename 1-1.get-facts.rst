@@ -58,7 +58,7 @@ stdout before exiting.
 
 Next, add the first ``task``. This task will use the ``set_fact`` module to set a parameter called 'provider'.
 
-This paramter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
+This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
 .. code:: yaml
 
