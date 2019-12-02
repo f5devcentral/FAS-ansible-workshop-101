@@ -53,14 +53,12 @@ Enter the following play definition into ``bigip-facts.yml``:
 
 **Step 3**
 
-A play is a list of tasks. Tasks and modules have a 1:1 correlation.
-Ansible modules are reusable, standalone scripts that can be used by
-the Ansible API, or by the ansible or ansible-playbook programs.
-They return information to ansible by printing a JSON string to
+A play is a list of tasks. Tasks and modules have a 1:1 correlation. Ansible modules are reusable, standalone scripts that can be used by the Ansible API, or by the ansible or ansible-playbook programs.They return information to ansible by printing a JSON string to
 stdout before exiting.
 
-Next, add the first ``task``. This task will use the ``bigip_device_info`` module to grab useful information from the BIG-IP
-device.
+Next, add the first ``task``. This task will use the ``set_fact`` module to set a parameter called 'provider'.
+
+This paramter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
 .. code:: yaml
 
