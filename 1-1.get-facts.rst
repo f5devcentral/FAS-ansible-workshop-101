@@ -164,7 +164,7 @@ Run the playbook - exit back into the command line of the control host and execu
    [student1@ansible ~]$ ansible-playbook bigip-facts.yml
 
 Playbook Output
-===============
+---------------
 
 The output will look as follows.
 
@@ -248,7 +248,7 @@ The output will look as follows.
         "device_facts['system_info']['product_version']": "13.1.0.7"
     }
 
-    PLAY RECAP **************************************************************************************************************************************************
+    PLAY RECAP ******************************************************************************************************************************
     f5                         : ok=4    changed=1    unreachable=0    failed=0
 
 
