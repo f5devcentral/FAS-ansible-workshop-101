@@ -1,0 +1,234 @@
+Exercise 1.3 - Adding a load balancing pool
+===========================================
+
+Objective
+---------
+
+Demonstrate use of the `BIG-IP pool
+module <https://docs.ansible.com/ansible/latest/modules/bigip_pool_module.html>`__
+to configure a load balancing pool in BIG-IP device. A load balancing
+pool is a logical set of devices, such as web servers, that you group
+together to receive and process traffic.
+
+Guide
+-----
+
+**Step 1**
+
+Using your text editor of choice create a new file called ``virtuals_pools.yml`` and add the code below
+
+``vim`` and ``nano`` are available on the control node
+
+.. code::
+
+   [student1@ansible ~]$ nano virtuals_pools.yml
+   
+   vips_pools:
+	- vs_name: "vip"
+	  pool_name: "http-pool"
+	  port: 8081
+	- vs_name: "vip1"
+	  pool_name: "http-pool1"
+	  port: 8082
+	- vs_name: "vip2"
+	  pool_name: "http-pool2"
+	  port: 8083
+	- vs_name: "vip3"
+	  pool_name: "http-pool3"
+	  port: 8084
+	- vs_name: "vip4"
+	  pool_name: "http-pool4"
+	  port: 8085
+	- vs_name: "vip5"
+	  pool_name: "http-pool5"
+	  port: 8086
+	- vs_name: "vip6"
+	  pool_name: "http-pool6"
+	  port: 8087
+	- vs_name: "vip7"
+	  pool_name: "http-pool7"
+	  port: 8088
+	- vs_name: "vip8"
+	  pool_name: "http-pool8"
+	  port: 8089
+	- vs_name: "vip9"
+	  pool_name: "http-pool9"
+	  port: 8090
+	- vs_name: "vip10"
+	  pool_name: "http-pool10"
+	  port: 8091
+	- vs_name: "vip11"
+	  pool_name: "http-pool11"
+	  port: 8092
+	- vs_name: "vip12"
+	  pool_name: "http-pool12"
+	  port: 8093
+	- vs_name: "vip13"
+	  pool_name: "http-pool13"
+	  port: 8094
+	- vs_name: "vip14"
+	  pool_name: "http-pool14"
+	  port: 8095
+	- vs_name: "vip15"
+	  pool_name: "http-pool15"
+	  port: 8096
+
+This is a variable file consisting of VIPs/Ports and pools which we will pass to the playbook and loop
+through these and add them to the BIG-IP
+	  
+**Step 2**
+
+Using your text editor of choice create a new file called ``bigip-pool.yml``.
+
+.. code::
+
+   [student1@ansible ~]$ nano bigip-pool.yml
+
+   ``vim`` and ``nano`` are available on the control node
+
+**Step 3**
+
+Enter the following play definition into ``bigip-pool.yml``:
+
+.. code:: yaml
+
+    ---
+    - name: BIG-IP SETUP
+      hosts: lb
+      connection: local
+      gather_facts: false
+
+	  vars_files:
+       virtuals_pools.yml
+	
+-  The ``---`` at the top of the file indicates that this is a YAML
+   file.
+-  The ``hosts: lb``, indicates the play is run only on the lb group.
+   Technically there only one F5 device but if there were multiple they
+   would be configured simultaneously.
+-  ``connection: local`` tells the Playbook to run locally (rather than
+   SSHing to itself)
+-  ``gather_facts: false`` disables facts gathering. We are not using
+   any fact variables for this playbook.
+- ``vars_file`` is a ansible reserved word to include a file to the playbook
+
+**Step 4**
+
+Next, add the first ``task``. This task will use the ``set_fact`` module to set a parameter called 'provider'.
+
+This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
+
+.. code:: yaml
+
+   tasks:
+
+   - set_fact:
+      provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+-  The ``server: "{{private_ip}}"`` parameter tells the module to
+   connect to the F5 BIG-IP IP address, which is stored as a variable
+   ``private_ip`` in inventory
+-  The ``user: "{{ansible_user}}"`` parameter tells the module the
+   username to login to the F5 BIG-IP device with
+-  The ``password: "{{ansible_ssh_pass}}"`` parameter tells the module
+   the password to login to the F5 BIG-IP device with
+-  The ``server_port: 8443`` parameter tells the module the port to
+   connect to the F5 BIG-IP device with
+   
+**Step 5**
+
+Next, add ``task`` the ``bigip_pool``module to configure the two RHEL web servers as nodes on the BIG-IP F5 load
+balancer.
+
+.. code:: yaml
+
+   tasks:
+
+   - name: CREATE POOL
+     bigip_pool:
+       provider: "{{provider}}"
+       name: "{{item.pool_name}}"
+       lb_method: "round-robin"
+       monitors: "/Common/http"
+       monitor_type: "and_list"
+     loop: "{{vips_pools}}"
+		
+-  ``name: CREATE POOL`` is a user defined description that will display
+   in the terminal output.
+-  ``bigip_pool:`` tells the task which module to use.
+-  The ``name:` parameter tells the module to create a pool with name from the variable file
+-  The ``lb_method: "round-robin"`` parameter tells the module the load
+   balancing method will be round-robin. A full list of methods can be
+   found on the documentation page for bigip_pool.
+-  The ``monitors: "/Common/http"`` parameter tells the module the that
+   the http_pool will only look at http traffic.
+-  The ``monitor_type: "and_list"`` ensures that all monitors are
+   checked.
+-  ``loop`` will repeat the task for all entries in the variable file
+
+**Step 6**
+
+Run the playbook - exit back into the command line of the control host and execute the following:
+
+.. code::
+
+   [student1@ansible ~]$ ansible-playbook bigip-pool.yml
+
+Playbook Output
+---------------
+
+The output will look as follows.
+
+.. code:: yaml
+
+    student1@ansible ~]$ ansible-playbook bigip-pool.yml
+
+	PLAY [BIG-IP SETUP] *****************************************************************************************************************************************
+
+	TASK [set_fact] *********************************************************************************************************************************************
+	ok: [f5]
+
+	TASK [CREATE POOL] ******************************************************************************************************************************************
+	ok: [f5] => (item={u'pool_name': u'http-pool', u'vs_name': u'vip', u'port': 8081})
+	ok: [f5] => (item={u'pool_name': u'http-pool1', u'vs_name': u'vip1', u'port': 8082})
+	ok: [f5] => (item={u'pool_name': u'http-pool2', u'vs_name': u'vip2', u'port': 8083})
+	ok: [f5] => (item={u'pool_name': u'http-pool3', u'vs_name': u'vip3', u'port': 8084})
+	ok: [f5] => (item={u'pool_name': u'http-pool4', u'vs_name': u'vip4', u'port': 8085})
+	ok: [f5] => (item={u'pool_name': u'http-pool5', u'vs_name': u'vip5', u'port': 8086})
+	ok: [f5] => (item={u'pool_name': u'http-pool6', u'vs_name': u'vip6', u'port': 8087})
+	ok: [f5] => (item={u'pool_name': u'http-pool7', u'vs_name': u'vip7', u'port': 8088})
+	ok: [f5] => (item={u'pool_name': u'http-pool8', u'vs_name': u'vip8', u'port': 8089})
+	ok: [f5] => (item={u'pool_name': u'http-pool9', u'vs_name': u'vip9', u'port': 8090})
+	ok: [f5] => (item={u'pool_name': u'http-pool10', u'vs_name': u'vip10', u'port': 8091})
+	ok: [f5] => (item={u'pool_name': u'http-pool11', u'vs_name': u'vip11', u'port': 8092})
+	ok: [f5] => (item={u'pool_name': u'http-pool12', u'vs_name': u'vip12', u'port': 8093})
+	ok: [f5] => (item={u'pool_name': u'http-pool13', u'vs_name': u'vip13', u'port': 8094})
+	ok: [f5] => (item={u'pool_name': u'http-pool14', u'vs_name': u'vip14', u'port': 8095})
+	ok: [f5] => (item={u'pool_name': u'http-pool15', u'vs_name': u'vip15', u'port': 8096})
+
+
+
+Solution
+--------
+
+The finished Ansible Playbook is provided here for an Answer key. Click
+here: `bigip-pool.yml <../1.3-add-pool/bigip-pool.yml>`__.
+
+Verifying the Solution
+----------------------
+
+Login to the F5 with your web browser to see what was configured. Grab
+the IP information for the F5 load balancer from the
+lab_inventory/hosts file, and type it in like so: https://X.X.X.X:8443/
+
+Login information for the BIG-IP: - username: admin - password:
+**provided by instructor, defaults to ansible**
+
+The load balancer pool can be found by navigating the menu on the left. Click on Local Traffic-> then click on Pools.
+
+**You have finished this exercise**

@@ -1,0 +1,273 @@
+Exercise 1.4: Adding members to a pool on F5
+============================================
+
+Objective
+---------
+
+Demonstrate use of the `BIG-IP pool member
+module <https://docs.ansible.com/ansible/latest/modules/bigip_pool_module.html>`__
+to tie web server nodes into the load balancing pool ``http_pool``
+created in the previous exercises.
+
+Guide
+-----
+
+**Step 0:**
+
+Make sure you have the virtuals_pools.yml files defined, refer exercise 1.3-add-pool.
+
+**Step 1:**
+
+
+Using your text editor of choice create a new file called ``bigip-pool-members.yml``.
+
+.. code::
+
+   [student1@ansible ~]$ nano bigip-pool-members.yml
+
+   ``vim`` and ``nano`` are available on the control node
+
+**Step 2:**
+
+
+Enter the following play definition into ``bigip-pool-members.yml``:
+
+.. code:: yaml
+
+    ---
+    - name: BIG-IP SETUP
+      hosts: lb
+      connection: local
+      gather_facts: false
+
+	  vars_files:
+       virtuals_pools.yml
+
+-  The ``---`` at the top of the file indicates that this is a YAML
+   file.
+-  The ``hosts: lb``, indicates the play is run only on the lb group.
+   Technically there only one F5 device but if there were multiple they
+   would be configured simultaneously.
+-  ``connection: local`` tells the Playbook to run locally (rather than
+   SSHing to itself)
+-  ``gather_facts: false`` disables facts gathering. We are not using
+   any fact variables for this playbook.
+- ``vars_file`` is a ansible reserved word to include a file to the playbook
+
+**Step 3**
+
+Next, add the first ``task``. This task will use the ``set_fact`` module to set a parameter called 'provider'.
+
+This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
+
+.. code:: yaml
+
+   tasks:
+
+   - set_fact:
+      provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+-  The ``server: "{{private_ip}}"`` parameter tells the module to
+   connect to the F5 BIG-IP IP address, which is stored as a variable
+   ``private_ip`` in inventory
+-  The ``user: "{{ansible_user}}"`` parameter tells the module the
+   username to login to the F5 BIG-IP device with
+-  The ``password: "{{ansible_ssh_pass}}"`` parameter tells the module
+   the password to login to the F5 BIG-IP device with
+-  The ``server_port: 8443`` parameter tells the module the port to
+   connect to the F5 BIG-IP device with
+
+**Step 4**
+
+Next, add the first ``task``. This task will use the ``bigip_pool_member`` module configure the two RHEL web servers as nodes
+on the BIG-IP F5 load balancer.
+
+.. code:: yaml
+
+    
+	tasks:
+
+	- name: ADD POOL MEMBERS
+      bigip_pool_member:
+       provider: "{{provider}}"
+       state: "present"
+       name: "{{hostvars[item[0]].inventory_hostname}}"
+       host: "{{hostvars[item[0]].ansible_host}}"
+       port: "80"
+       pool: "{{item[1].pool_name}}"
+      with_nested:
+       - "{{ groups['webservers'] }}"
+       - "{{vips_pools}}"
+
+Explanation of each line within the task: 
+- ``name: ADD POOL MEMBERS`` is a user defined description that will display in the terminal output.
+- ``bigip_pool_member:`` tells the task which module to use.
+- The ``state: "present"`` parameter tells the module we want this to be added rather than deleted. 
+- The ``name: "{{hostvars[item].inventory_hostname}}"`` parameter tells the module to use the ``inventory_hostname`` as the name (which will be host1 and host2). 
+- The ``host: "{{hostvars[item].ansible_host}}"``parameter tells the module to add a web server IP address already defined in our inventory. 
+- The ``pool:` parameter tells the module to put this node into a pool with name from the second list {{vips_pool}}
+- ``with_nested:`` tells the task to perform a nested loop over the provided list. The list in this case is the group webservers which includes two RHEL hosts and the list of virtuals
+
+**Step 5**
+
+Run the playbook - exit back into the command line of the control host and execute the following:
+
+.. code::
+
+   [student1@ansible ~]$ ansible-playbook bigip-pool-members.yml
+
+Playbook Output
+---------------
+
+The output will look as follows.
+
+.. code:: yaml
+
+   [student1@ansible ~]$ ansible-playbook bigip-add-pool.yml
+	
+	PLAY [BIG-IP SETUP] *****************************************************************************************************************************************
+	
+	TASK [set_fact] *********************************************************************************************************************************************
+	ok: [f5]
+	
+	TASK [ADD POOL MEMBERS] *************************************************************************************************************************************
+	changed: [f5] => (item=[u'host1', {u'pool_name': u'http-pool', u'vs_name': u'vip', u'port': 8081}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool1', u'vs_name': u'vip1', u'port': 8082}])                                           8,5           All
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool2', u'vs_name': u'vip2', u'port': 8083}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool3', u'vs_name': u'vip3', u'port': 8084}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool4', u'vs_name': u'vip4', u'port': 8085}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool5', u'vs_name': u'vip5', u'port': 8086}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool6', u'vs_name': u'vip6', u'port': 8087}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool7', u'vs_name': u'vip7', u'port': 8088}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool8', u'vs_name': u'vip8', u'port': 8089}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool9', u'vs_name': u'vip9', u'port': 8090}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool10', u'vs_name': u'vip10', u'port': 8091}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool11', u'vs_name': u'vip11', u'port': 8092}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool12', u'vs_name': u'vip12', u'port': 8093}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool13', u'vs_name': u'vip13', u'port': 8094}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool14', u'vs_name': u'vip14', u'port': 8095}])
+	ok: [f5] => (item=[u'host1', {u'pool_name': u'http-pool15', u'vs_name': u'vip15', u'port': 8096}])
+	changed: [f5] => (item=[u'host2', {u'pool_name': u'http-pool', u'vs_name': u'vip', u'port': 8081}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool1', u'vs_name': u'vip1', u'port': 8082}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool2', u'vs_name': u'vip2', u'port': 8083}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool3', u'vs_name': u'vip3', u'port': 8084}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool4', u'vs_name': u'vip4', u'port': 8085}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool5', u'vs_name': u'vip5', u'port': 8086}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool6', u'vs_name': u'vip6', u'port': 8087}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool7', u'vs_name': u'vip7', u'port': 8088}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool8', u'vs_name': u'vip8', u'port': 8089}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool9', u'vs_name': u'vip9', u'port': 8090}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool10', u'vs_name': u'vip10', u'port': 8091}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool11', u'vs_name': u'vip11', u'port': 8092}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool12', u'vs_name': u'vip12', u'port': 8093}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool13', u'vs_name': u'vip13', u'port': 8094}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool14', u'vs_name': u'vip14', u'port': 8095}])
+	ok: [f5] => (item=[u'host2', {u'pool_name': u'http-pool15', u'vs_name': u'vip15', u'port': 8096}])
+
+
+Output parsing
+--------------
+
+Let's use the bigip_device_info to collect the pool members on
+BIG-IP. `JSON
+query <https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#json-query-filter>`__
+is a powerful filter that can be used. Please go through before
+proceeding
+
+..code::
+
+  [student1@ansible ~]$ nano display-pool-members.yml
+
+Enter the following:
+
+.. code::
+
+   - name: "List pool members"
+     hosts: lb
+     gather_facts: false
+     connection: local
+
+     tasks:
+
+     - set_fact:
+        provider:
+         server: "{{private_ip}}"
+         user: "{{ansible_user}}"
+         password: "{{ansible_ssh_pass}}"
+         server_port: 8443
+         validate_certs: no
+
+     - name: Query BIG-IP facts
+       bigip_device_info:
+         provider: "{{provider}}"
+         gather_subset:
+          - ltm-pools
+       register: device_facts
+
+     - name: "View complete output"
+       debug: "msg={{device_facts}}"
+
+     - name: "Show members belonging to pool"
+       debug: "msg={{item}}"
+       loop: "{{device_facts.ltm_pools | json_query(query_string)}}"
+       vars:
+        query_string: "[?name=='http-pool'].members[*].name[]"
+
+
+-  ``vars:`` in the module is defining a variable query_string to beused within the module itself
+-  ``query_String`` will have the name of all members from pool name 'http-pool'. query_string is defined to make it easier to read the entire json string
+
+Execute the playbook
+
+.. code::
+
+    [student1@ansible ~]$ ansible-playbook display-pool-members.yml
+
+Output
+
+.. code::
+
+   [student1@ansible ~]$ ansible-playbook display-pool-member.yml
+
+   PLAY [List pool members] ************************************************************************************************************************************
+
+   TASK [Query BIG-IP facts] ***********************************************************************************************************************************
+   changed: [f5]
+
+   TASK [Show members belonging to pool] ***********************************************************************************************************************
+   ok: [f5] => (item=host1:80) => {
+       "msg": "host1:80"
+   }
+   ok: [f5] => (item=host2:80) => {
+       "msg": "host2:80"
+   }
+
+   PLAY RECAP **************************************************************************************************************************************************
+   f5                         : ok=2    changed=1    unreachable=0    failed=0
+
+Solution
+--------
+
+The finished Ansible Playbook is provided here for an Answer key. Click here: `bigip-pool-members.yml <../1.4-add-pool-members/bigip-pool-members.yml>`__.
+
+Verifying the Solution
+----------------------
+
+Login to the F5 with your web browser to see what was configured. Grab
+the IP information for the F5 load balancer from the
+lab_inventory/hosts file, and type it in like so: https://X.X.X.X:8443/
+
+Login information for the BIG-IP: - username: admin - password:
+**provided by instructor** defaults to ansible
+
+The pool will now show two members (host1 and host2). Click on Local
+Traffic-> then click on Pools. Click on a particular pool to get more granular
+information. Click on the Members tab in the middle to list all the
+Members.
+
+**You have finished this exercise.**

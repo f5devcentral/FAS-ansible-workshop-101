@@ -1,0 +1,217 @@
+Exercise 1.5: Using the bigip_virtual_server module
+=====================================================
+
+Objective
+---------
+
+Demonstrate use of the `BIG-IP virtual server
+module <https://docs.ansible.com/ansible/latest/modules/bigip_virtual_server_module.html>`__
+to configure a virtual server on the BIG-IP. Virtual server is a
+combination of IP:Port.
+
+Guide
+-----
+
+**Step 1:**
+
+
+Using your text editor of choice create a new file called ``bigip-virtual-server.yml``.
+
+.. code::
+
+   [student1@ansible ~]$ nano bigip-virtual-server.yml
+
+   ``vim`` and ``nano`` are available on the control node
+   
+**Step 2:**
+
+Enter the following play definition into ``bigip-virtual-server.yml``:
+
+.. code:: yaml
+
+    ---
+    - name: BIG-IP SETUP
+      hosts: lb
+      connection: local
+      gather_facts: false
+
+	  vars_files:
+       virtuals_pools.yml
+   
+-  The ``---`` at the top of the file indicates that this is a YAML
+   file.
+-  The ``hosts: f5``, indicates the play is run only on the F5 BIG-IP
+   device
+-  ``connection: local`` tells the Playbook to run locally (rather than
+   SSHing to itself)
+-  ``gather_facts: no`` disables facts gathering. We are not using any
+   fact variables for this playbook.
+- ``vars_file`` is a ansible reserved word to include a file to the playbook
+
+**Step 3**
+
+Next, add the first ``task``. This task will use the ``set_fact`` module to set a parameter called 'provider'.
+
+This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
+
+.. code:: yaml
+
+   tasks:
+
+   - set_fact:
+      provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+-  The ``server: "{{private_ip}}"`` parameter tells the module to
+   connect to the F5 BIG-IP IP address, which is stored as a variable
+   ``private_ip`` in inventory
+-  The ``user: "{{ansible_user}}"`` parameter tells the module the
+   username to login to the F5 BIG-IP device with
+-  The ``password: "{{ansible_ssh_pass}}"`` parameter tells the module
+   the password to login to the F5 BIG-IP device with
+-  The ``server_port: 8443`` parameter tells the module the port to
+   connect to the F5 BIG-IP device with
+
+**Step 4**
+
+Next, add the ``task``. This task will use the ``bigip-virtual-server``
+to configure a virtual server on the BIG-IP
+
+.. code:: yaml
+
+   tasks:
+
+   - name: ADD VIRTUAL SERVER
+     bigip_virtual_server:
+      provider: "{{provider}}"
+      name: "{{item.vs_name}}"
+      destination: "{{private_ip}}"
+      port: "{{item.port}}"
+      enabled_vlans: "all"
+      all_profiles: ['http','clientssl','oneconnect']
+      pool: "{{item.pool_name}}"
+      snat: "Automap"
+     loop: "{{vips_pools}}"
+
+   
+-  ``name: ADD VIRTUAL SERVER`` is a user defined description that will
+   display in the terminal output.
+-  ``bigip_virtual_server:`` tells the task which module to use.
+-  The ``name: "vip"`` parameter tells the module to create a virtual
+   server
+-  The ``destination"`` parameter tells the module which IP address to
+   assign for the virtual server
+-  The ``port`` paramter tells the module which Port the virtual server
+   will be listening on
+-  The ``enabled_vlans`` parameter tells the module which all vlans the
+   virtual server is enabled for
+-  The ``all_profiles`` paramter tells the module which all profiles are
+   assigned to the virtuals server
+-  The ``pool`` parameter tells the module which pool is assigned to the
+   virtual server
+-  The ``snat`` paramter tells the module what the Source network
+   address address should be. In this module we are assigning it to be
+   Automap which means the source address on the request that goes to
+   the backend server will be the self-ip address of the BIG-IP
+
+
+**Step 5**
+
+Run the playbook - exit back into the command line of the control host and execute the following:
+
+.. code::
+
+   [student1@ansible ~]$ ansible-playbook bigip-virtual-server.yml
+
+Playbook Output
+---------------
+
+.. code:: yaml
+
+    [student1@ansible]$ ansible-playbook bigip-virtual-server.yml
+
+    PLAY [BIG-IP SETUP] *****************************************************************************************************************************************
+
+	TASK [set_fact] *********************************************************************************************************************************************
+	ok: [f5]
+
+	TASK [ADD VIRTUAL SERVER] ***********************************************************************************************************************************
+	ok: [f5] => (item={u'pool_name': u'http-pool', u'vs_name': u'vip', u'port': 8081})
+	ok: [f5] => (item={u'pool_name': u'http-pool1', u'vs_name': u'vip1', u'port': 8082})
+	ok: [f5] => (item={u'pool_name': u'http-pool2', u'vs_name': u'vip2', u'port': 8083})
+	ok: [f5] => (item={u'pool_name': u'http-pool3', u'vs_name': u'vip3', u'port': 8084})
+	ok: [f5] => (item={u'pool_name': u'http-pool4', u'vs_name': u'vip4', u'port': 8085})
+	ok: [f5] => (item={u'pool_name': u'http-pool5', u'vs_name': u'vip5', u'port': 8086})
+	ok: [f5] => (item={u'pool_name': u'http-pool6', u'vs_name': u'vip6', u'port': 8087})
+	ok: [f5] => (item={u'pool_name': u'http-pool7', u'vs_name': u'vip7', u'port': 8088})
+	ok: [f5] => (item={u'pool_name': u'http-pool8', u'vs_name': u'vip8', u'port': 8089})
+	ok: [f5] => (item={u'pool_name': u'http-pool9', u'vs_name': u'vip9', u'port': 8090})
+	ok: [f5] => (item={u'pool_name': u'http-pool10', u'vs_name': u'vip10', u'port': 8091})
+	ok: [f5] => (item={u'pool_name': u'http-pool11', u'vs_name': u'vip11', u'port': 8092})
+	ok: [f5] => (item={u'pool_name': u'http-pool12', u'vs_name': u'vip12', u'port': 8093})
+	ok: [f5] => (item={u'pool_name': u'http-pool13', u'vs_name': u'vip13', u'port': 8094})
+	ok: [f5] => (item={u'pool_name': u'http-pool14', u'vs_name': u'vip14', u'port': 8095})
+	ok: [f5] => (item={u'pool_name': u'http-pool15', u'vs_name': u'vip15', u'port': 8096})
+
+
+Solution
+--------
+
+The finished Ansible Playbook is provided here for an Answer key. Click
+here: `bigip-virtual-server.yml <../1.5-add-virtual-server/bigip-virtual-server.yml>`__.
+
+Verifying the Solution
+----------------------
+
+To see the configured **Virtual Server**, login to the F5 load balancer
+with your web browser.
+
+    Grab the IP information for the F5 load balancer from the
+    ``/home/studentX/networking_workshop/lab_inventory/hosts`` file, and
+    type it in like so: https://X.X.X.X:8443/
+
+Login information for the BIG-IP: - username: admin - password:
+**provided by instructor** defaults to ansible
+
+The load balancer virtual server can be found by navigating the menu on
+the left. Click on **Local Traffic**. then click on **Virtual Server**.
+
+Verifying the web servers
+-------------------------
+
+Each RHEL web server actually already has apache running. Exercise 1.1
+through 1.5 have successfully setup the load balancer for the pool of
+web servers. Open up the public IP of the F5 load balancer in your web
+browser:
+
+- This time use port 8081/8096 instead of 8443, e.g. 
+  - https://X.X.X.X:8081/
+  - https://X.X.X.X:8082/ etc.
+
+Each time you refresh the host will change between **host1** and **host2**.
+
+Alternate Verification Method
+-----------------------------
+
+Instead of using a browser window it is also possible to use the command
+line on the Ansible control node. Use the ``curl`` command on the
+**ansible_host** public IP address in combination with the
+``--insecure`` and ``--silent`` command line arguments. Since the entire
+website is loaded on the command line it is recommended to ``| grep``
+for the student number assigned to the respective workbench. (e.g.
+student5 would ``| grep student5``)
+
+.. code::
+
+   [studentX@ansible ~]$ curl https://172.16.26.136:443 --insecure --silent | grep studentX
+       <p>F5TEST-studentX-host1</p>
+   [studentX@ansible ~]$ curl https://172.16.26.136:443 --insecure --silent | grep studentX
+       <p>F5TEST-studentX-host2</p>
+   [studentX@ansible ~]$ curl https://172.16.26.136:443 --insecure --silent | grep studentX       
+       <p>F5TEST-studentX-host1</p>
+
+**You have finished this exercise.**
