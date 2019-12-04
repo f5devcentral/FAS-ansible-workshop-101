@@ -77,10 +77,6 @@ Section 3 - Ansible F5 AS3 Exercises
 -  Exercise 3.3 - Deploying WAF through AS3
 
 
-To start a discussion or to post a question related to the workshop use link:
-
-**https://github.com/f5devcentral/FAS-ansible-workshop-101/issues**
-
 .. toctree::
    :glob:
    :maxdepth: 2
