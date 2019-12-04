@@ -4,8 +4,8 @@ Exercise 1.8: Gather and display virtual server facts.
 Objective
 ---------
 
-Demonstrate use of the `BIG-IP config
-module <https://docs.ansible.com/ansible/latest/modules/bigip_device_facts.html>`__ to save the running configuration to disk
+Demonstrate use of the `BIG-IP device info 
+module <https://docs.ansible.com/ansible/latest/modules/bigip_device_info.html>`__ to gather facts about virtual servers based on different conditions
 
 Guide
 -----

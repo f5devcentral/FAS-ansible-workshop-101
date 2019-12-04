@@ -1,5 +1,5 @@
-Exercise 1.7: Using the bigip\_config module
-============================================
+Exercise 1.7: Using the bigip_config module to save running config
+==================================================================
 
 Objective
 ---------
