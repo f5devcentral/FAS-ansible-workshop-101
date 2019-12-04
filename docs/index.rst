@@ -21,11 +21,11 @@ use AS3 with Ansible and push configurations through a playbook on the
 BIG-IP.
 
 ``Note: If you have any questions or issues, don't hesitate to open an issue to ask for help!``
+
 `Click here to open an
 issue <https://github.com/f5devcentral/FAS-ansible-workshop-101/issues>`__.
 
-Pre-requisites
---------------
+**Pre-requisites**
 
 To get the most out of this training, the student should already have
 some basic knowledge about the use of Ansible and BIG-IP. When you are
@@ -34,8 +34,7 @@ completely new to Ansible it is recommended to start with the 2 hour
 Start <https://linuxacademy.com/cp/modules/view/id/288>`__ training from
 Linux Academy.
 
-Lab Environment
----------------
+**Lab Environment**
 
 This Ansible 101 training comes with a pre-configured lab environment.
 Please go `here <https://github.com/f5devcentral/FAS-provisioner>`__ to
@@ -79,9 +78,8 @@ Section 3 - Ansible F5 AS3 Exercises
 
 
 To start a discussion or to post a question related to the workshop use link:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **https://github.com/f5devcentral/FAS-ansible-workshop-101/issues**
+**https://github.com/f5devcentral/FAS-ansible-workshop-101/issues**
 
 .. toctree::
    :glob:
