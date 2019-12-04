@@ -20,10 +20,9 @@ playbooks for deploying application services on BIG-IP and be able to
 use AS3 with Ansible and push configurations through a playbook on the
 BIG-IP.
 
-``Note: If you have any questions or issues, don't hesitate to open an issue to ask for help!``
+.. note::
 
-`Click here to open an
-issue <https://github.com/f5devcentral/FAS-ansible-workshop-101/issues>`__.
+   If you have any questions or issues `Click here to open a request <https://github.com/f5devcentral/FAS-ansible-workshop-101/issues>`__.
 
 **Pre-requisites**
 
@@ -31,8 +30,7 @@ To get the most out of this training, the student should already have
 some basic knowledge about the use of Ansible and BIG-IP. When you are
 completely new to Ansible it is recommended to start with the 2 hour
 `Ansible Quick
-Start <https://linuxacademy.com/cp/modules/view/id/288>`__ training from
-Linux Academy.
+Start <https://linuxacademy.com/cp/modules/view/id/288>`__ training from Linux Academy.
 
 **Lab Environment**
 
@@ -43,8 +41,10 @@ This content is a multi-purpose toolkit for effectively demonstrating
 Ansible's capabilities on F5 BIG-IP by providing workshop training in
 various forms -- instructor-led, hands-on or self-paced.
 
-Login information for the BIG-IP: - username: admin - password:
-**provided by instructor** (default is ansible)
+Login information for the BIG-IP: 
+
+- username: admin 
+- password: **provided by instructor OR choosen while deploying the infrastructure using the provisioner** (default is ansible)
 
 Following topics will be covered:
 
