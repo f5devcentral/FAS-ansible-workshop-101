@@ -29,7 +29,7 @@ completely new to Ansible it is recommended to start with the 2 hour [Ansible Qu
 
 **Lab Environment**
 
-This Ansible 101 training comes with a pre-configured lab environment. Please go **[here]**(https://github.com/f5devcentral/FAS-provisioner) to
+This Ansible 101 training comes with a pre-configured lab environment. Please go **[here](https://github.com/f5devcentral/FAS-provisioner)** to
 provision your lab environment.
 
 This content is a multi-purpose toolkit for effectively demonstrating Ansible's capabilities on F5 BIG-IP by providing workshop training in
