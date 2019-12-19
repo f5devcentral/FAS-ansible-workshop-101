@@ -232,3 +232,5 @@ Login information for the BIG-IP: - username: admin - password:
 The load balancer pool can be found by navigating the menu on the left. Click on Local Traffic-> then click on Pools.
 
 **You have finished this exercise**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../1.4-add-pool-members.rst>`_.
