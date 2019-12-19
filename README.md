@@ -51,13 +51,14 @@ Following topics will be covered
 
 ## Section 2 - Ansible F5 Operational/Advanced Exercises
 
--  Exercise 2.0 - Disabling a pool member 
--  Exercise 2.1 - Deleting F5 BIG-IP Configuration
--  Exercise 2.2 - Error Handling 
+-  [Exercise 2.0 - Disabling a pool member](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.0-disable-pool-member.rst)
+-  [Exercise 2.1 - Deleting F5 BIG-IP Configuration](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.1-delete-configuration.rst)
+-  [Exercise 2.2 - Error Handling](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.2-error-handling.rst) 
 
 ## Section 3 - Ansible F5 AS3 Exercises
 
--  Exercise 3.0 - Intro to AS3
--  Exercise 3.1 - Operational Change with AS3 
--  Exercise 3.2 - Deleting a Web Application 
--  Exercise 3.3 - Deploying WAF through AS3
+-  [Exercise 3.0 - Intro to AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.0-as3-intro.rst)
+-  [Exercise 3.1 - Operational Change with AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.1-as3-change.rst) 
+-  [Exercise 3.2 - Deleting a Web Application](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.2-as3-delete.rst 
+-  [Exercise 3.3 - Deploying WAF through AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.3-as3-asm.rst)
+
