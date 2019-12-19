@@ -142,4 +142,4 @@ The list of nodes can be found by navigating the menu on the left. Click on Loca
 
 **You have finished this exercise**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.3-add-pool.rst>`_
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.3-add-pool.rst>`_.
