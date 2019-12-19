@@ -136,4 +136,4 @@ GUI or a user may use  `ansible-vault <https://docs.ansible.com/ansible/latest/n
 
 **You have finished this exercise**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.1.get-facts.rst>`_
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.1.get-facts.rst>`_.
