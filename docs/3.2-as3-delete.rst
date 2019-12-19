@@ -101,3 +101,5 @@ here: <../3.2-as3-delete/delete.yml>`_.
 Login to the web UI and make sure the ``Partition`` is removed.
 
 **You have finished this exercise.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/3.3-as3-asm.rst>`_.
