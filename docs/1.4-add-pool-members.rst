@@ -271,3 +271,5 @@ information. Click on the Members tab in the middle to list all the
 Members.
 
 **You have finished this exercise.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.5-add-virtual-server.rst>`_.
