@@ -39,15 +39,15 @@ Following topics will be covered
 
 ## Section 1 - Ansible F5 Basic Exercises
 
--  [Exercise 1.0 - Exploring the lab environment](../FAS-ansible-workshop-101/tree/master/docs/1.0-explore.rst)
--  [Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP](../FAS-ansible-workshop-101/tree/master/docs/1.1.get-facts.rst)
--  [Exercise 1.2 - Adding nodes to F5 BIG-IP](../FAS-ansible-workshop-101/tree/master/docs/1.2-add-node.rst)
--  [Exercise 1.3 - Adding a load balancing pool](../FAS-ansible-workshop-101/tree/master/docs/1.3-add-pool.rst)
--  [Exercise 1.4 - Adding members to a pool](../FAS-ansible-workshop-101/tree/master/docs/1.4-add-pool-members.rst)
--  [Exercise 1.5 - Adding a virtual server](../FAS-ansible-workshop-101/tree/master/docs/1.5-add-virtual-server.rst)
--  [Exercise 1.6 - Adding and attaching an iRule to a virtual server](../FAS-ansible-workshop-101/tree/master/docs/1.6-add-irules.rst)
--  [Exercise 1.7 - Save the running configuration](../FAS-ansible-workshop-101/tree/master/docs/1.7-save-running-config.rst) 
--  [Exercise 1.8 - Virtual server facts](../FAS-ansible-workshop-101/tree/master/docs/1.8-virtual-server-facts.rst)
+-  [Exercise 1.0 - Exploring the lab environment](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.0-explore.rst)
+-  [Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.1.get-facts.rst)
+-  [Exercise 1.2 - Adding nodes to F5 BIG-IP](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.2-add-node.rst)
+-  [Exercise 1.3 - Adding a load balancing pool](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.3-add-pool.rst)
+-  [Exercise 1.4 - Adding members to a pool](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.4-add-pool-members.rst)
+-  [Exercise 1.5 - Adding a virtual server](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.5-add-virtual-server.rst)
+-  [Exercise 1.6 - Adding and attaching an iRule to a virtual server](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.6-add-irules.rst)
+-  [Exercise 1.7 - Save the running configuration](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.7-save-running-config.rst) 
+-  [Exercise 1.8 - Virtual server facts](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.8-virtual-server-facts.rst)
 
 ## Section 2 - Ansible F5 Operational/Advanced Exercises
 
