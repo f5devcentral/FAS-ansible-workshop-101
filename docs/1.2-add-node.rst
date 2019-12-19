@@ -141,3 +141,5 @@ Login information for the BIG-IP: - username: admin - password: ansible OR what 
 The list of nodes can be found by navigating the menu on the left. Click on Local Traffic-> then click on Nodes.
 
 **You have finished this exercise**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.3-add-pool.rst>`_
