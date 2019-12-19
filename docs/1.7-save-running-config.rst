@@ -112,3 +112,5 @@ here:
 `bigip-config.yml <https://github.com/f5alliances/ansible-use-cases-101/blob/master/1.7-save-running-config/bigip-config.yml>`__.
 
 **You have finished this exercise.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.7-save-running-config.rst>`_.
