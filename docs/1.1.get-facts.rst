@@ -60,7 +60,7 @@ Next, add the first ``task``. This task will use the ``set_fact`` module to set 
 
 This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
- .. code:: yaml
+.. code:: yaml
 
     tasks:
   
@@ -86,7 +86,7 @@ This parameter will hold all the connection details to the BIG-IP and will be us
 
 Next, add another``task``. This task will use the device info module to gather facts are the F5 device
 
- .. code:: yaml
+.. code:: yaml
 
     - name: COLLECT BIG-IP FACTS
       bigip_device_info:
@@ -113,7 +113,7 @@ to print the output from device_facts variable we registered the facts
 to.
 
 
- .. code:: yaml
+.. code:: yaml
 
     - name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
       debug:
@@ -137,7 +137,7 @@ Run the playbook - exit back into the command line of the control host and execu
 
 Finally lets add two more tasks to get more specific info from facts gathered.
 
- .. code:: yaml
+.. code:: yaml
 
     - name: DISPLAY ONLY THE MAC ADDRESS
       debug:
@@ -263,7 +263,7 @@ Going Further
 
 For this bonus exercise add the ``tags: debug`` paramteter (at the task level) to the existing debug task.
 
- .. code:: yaml
+.. code:: yaml
   
 	- name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
       debug:
