@@ -64,7 +64,7 @@ Section 1 - Ansible F5 Basic Exercises
 Section 2 - Ansible F5 Operational/Advanced Exercises
 -----------------------------------------------------
 
--  `Exercise 2.0 - Disabling a pool member <../docs/2.1-delete-configuration.rst>`_
+-  `Exercise 2.0 - Disabling a pool member <../docs/2.0-disable-pool-member.rst>`_
 -  `Exercise 2.1 - Deleting F5 BIG-IP Configuration <../docs/2.1-delete-configuration.rst>`_
 -  `Exercise 2.2 - Error Handling <../docs/2.2-error-handling.rst>`_
 
