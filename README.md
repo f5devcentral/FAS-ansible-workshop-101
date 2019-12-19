@@ -39,15 +39,15 @@ Following topics will be covered
 
 ## Section 1 - Ansible F5 Basic Exercises
 
--  Exercise 1.0 - Exploring the lab environment
--  Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP 
--  Exercise 1.2 - Adding nodes to F5 BIG-IP
--  Exercise 1.3 - Adding a load balancing pool
--  Exercise 1.4 - Adding members to a pool
--  Exercise 1.5 - Adding a virtual server
--  Exercise 1.6 - Adding and attaching an iRule to a virtual server
--  Exercise 1.7 - Save the running configuration 
--  Exercise 1.8 - Virtual server facts 
+-  [Exercise 1.0 - Exploring the lab environment](../docs/1.0-explore.rst)
+-  [Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP](../docs/1.1.get-facts.rst)
+-  [Exercise 1.2 - Adding nodes to F5 BIG-IP](../docs/1.2-add-node.rst)
+-  [Exercise 1.3 - Adding a load balancing pool](../docs/1.3-add-pool.rst)
+-  [Exercise 1.4 - Adding members to a pool](../docs/1.4-add-pool-members.rst)
+-  [Exercise 1.5 - Adding a virtual server](../docs/1.5-add-virtual-server.rst)
+-  [Exercise 1.6 - Adding and attaching an iRule to a virtual server](../docs/1.6-add-irules.rst)
+-  [Exercise 1.7 - Save the running configuration](../docs/1.7-save-running-config.rst) 
+-  [Exercise 1.8 - Virtual server facts](../docs/1.8-virtual-server-facts.rst)
 
 ## Section 2 - Ansible F5 Operational/Advanced Exercises
 
