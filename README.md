@@ -59,6 +59,6 @@ Following topics will be covered
 
 -  [Exercise 3.0 - Intro to AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.0-as3-intro.rst)
 -  [Exercise 3.1 - Operational Change with AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.1-as3-change.rst) 
--  [Exercise 3.2 - Deleting a Web Application](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.2-as3-delete.rst 
+-  [Exercise 3.2 - Deleting a Web Application](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.2-as3-delete.rst) 
 -  [Exercise 3.3 - Deploying WAF through AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.3-as3-asm.rst)
 
