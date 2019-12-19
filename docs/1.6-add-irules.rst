@@ -190,3 +190,5 @@ click on the Virtual Server named 'vip' then click on the 'resources' tab and vi
 the iRules attached to the Virtual Server
 
 **You have finished this exercise.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.7-save-running-config.rst>`_.
