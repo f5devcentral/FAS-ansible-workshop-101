@@ -24,7 +24,7 @@ Using your text editor of choice create a new file called ``bigip-config.yml``.
 
 **Step 2**
 
-Enter the following play definition into ``bigip-virtual-server.yml``:
+Enter the following play definition into ``bigip-config.yml``:
 
 .. code-block:: yaml
   
