@@ -54,15 +54,15 @@ This parameter will hold all the connection details to the BIG-IP and will be us
    connection: local
    gather_facts: false
 
-  tasks:
+   tasks:
 
-  - set_fact:
-     provider:
-      server: "{{private_ip}}"
-      user: "{{ansible_user}}"
-      password: "{{ansible_ssh_pass}}"
-      server_port: 8443
-      validate_certs: no
+   - set_fact:
+      provider:
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
       
 -  The ``server: "{{private_ip}}"`` parameter tells the module to
    connect to the F5 BIG-IP IP address, which is stored as a variable
@@ -87,22 +87,23 @@ balancer.
    connection: local
    gather_facts: false
 
-  tasks:
+   tasks:
 
-  - set_fact:
-     provider:
-      server: "{{private_ip}}"
-      user: "{{ansible_user}}"
-      password: "{{ansible_ssh_pass}}"
-      server_port: 8443
-      validate_certs: no
+   - set_fact:
+      provider:
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
         
-  - name: CREATE NODES
-    bigip_node:
-      provider: "{{provider}}"
-      host: "{{hostvars[item].ansible_host}}"
-      name: "{{hostvars[item].inventory_hostname}}"
-    loop: "{{ groups['webservers'] }}"
+   - name: CREATE NODES
+     bigip_node:
+       provider: "{{provider}}"
+       host: "{{hostvars[item].ansible_host}}"
+       name: "{{hostvars[item].inventory_hostname}}"
+     loop: "{{ groups['webservers'] }}"
+
 
 
 A `loop <https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html>`__ will repeat a task on a list provided to the task. In this case itwill loop twice, once for each of the two web servers.
