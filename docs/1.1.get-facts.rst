@@ -355,4 +355,3 @@ The Ansible Playbook will only run three tasks, skipping the ``DISPLAY COMPLETE 
 **You have finished this exercise.**
 
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.2-add-node.rst>`_
