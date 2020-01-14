@@ -219,4 +219,4 @@ the iRules attached to the Virtual Server
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.7-save-running-config.rst>`_.
+
