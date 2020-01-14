@@ -52,28 +52,28 @@ Section 1 - Ansible F5 Basic Exercises
 --------------------------------------
 
 -  Exercise 1.0 - Exploring the lab environment
--  Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP 
+-  Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP
 -  Exercise 1.2 - Adding nodes to F5 BIG-IP
 -  Exercise 1.3 - Adding a load balancing pool
 -  Exercise 1.4 - Adding members to a pool
 -  Exercise 1.5 - Adding a virtual server
 -  Exercise 1.6 - Adding and attaching an iRule to a virtual server
--  Exercise 1.7 - Save the running configuration 
--  Exercise 1.8 - Virtual server facts 
+-  Exercise 1.7 - Save the running configuration
+-  Exercise 1.8 - Virtual server facts
 
 Section 2 - Ansible F5 Operational/Advanced Exercises
 -----------------------------------------------------
 
--  Exercise 2.0 - Disabling a pool member 
+-  Exercise 2.0 - Disabling a pool member
 -  Exercise 2.1 - Deleting F5 BIG-IP Configuration
--  Exercise 2.2 - Error Handling 
+-  Exercise 2.2 - Error Handling
 
 Section 3 - Ansible F5 AS3 Exercises
 ------------------------------------
 
 -  Exercise 3.0 - Intro to AS3
--  Exercise 3.1 - Operational Change with AS3 
--  Exercise 3.2 - Deleting a Web Application 
+-  Exercise 3.1 - Operational Change with AS3
+-  Exercise 3.2 - Deleting a Web Application
 -  Exercise 3.3 - Deploying WAF through AS3
 
 

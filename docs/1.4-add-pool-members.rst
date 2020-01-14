@@ -32,16 +32,16 @@ Using your text editor of choice create a new file called ``bigip-pool-members.y
 
 Enter the following play definition into ``bigip-pool-members.yml``:
 
-.. code:: yaml
+.. code-block:: yaml
 
-    ---
-    - name: BIG-IP SETUP
-      hosts: lb
-      connection: local
-      gather_facts: false
+ ---
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
 
-	  vars_files:
-       virtuals_pools.yml
+   vars_files:
+     virtuals_pools.yml
 
 -  The ``---`` at the top of the file indicates that this is a YAML
    file.
@@ -60,17 +60,26 @@ Next, add the first ``task``. This task will use the ``set_fact`` module to set 
 
 This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
-.. code:: yaml
+.. code-block:: yaml
+
+ ---
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
+
+   vars_files:
+     virtuals_pools.yml
 
    tasks:
 
    - set_fact:
       provider:
-        server: "{{private_ip}}"
-        user: "{{ansible_user}}"
-        password: "{{ansible_ssh_pass}}"
-        server_port: 8443
-        validate_certs: no
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
 
 -  The ``server: "{{private_ip}}"`` parameter tells the module to
    connect to the F5 BIG-IP IP address, which is stored as a variable
@@ -87,23 +96,38 @@ This parameter will hold all the connection details to the BIG-IP and will be us
 Next, add the first ``task``. This task will use the ``bigip_pool_member`` module configure the two RHEL web servers as nodes
 on the BIG-IP F5 load balancer.
 
-.. code:: yaml
+.. code-block:: yaml
 
-    
-	tasks:
+ ---
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
 
-	- name: ADD POOL MEMBERS
-      bigip_pool_member:
+   vars_files:
+     virtuals_pools.yml
+
+   tasks:
+
+   - set_fact:
+      provider:
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
+        
+   - name: ADD POOL MEMBERS
+     bigip_pool_member:
        provider: "{{provider}}"
        state: "present"
        name: "{{hostvars[item[0]].inventory_hostname}}"
        host: "{{hostvars[item[0]].ansible_host}}"
        port: "80"
        pool: "{{item[1].pool_name}}"
-      with_nested:
+     with_nested:
        - "{{ groups['webservers'] }}"
        - "{{vips_pools}}"
-
 Explanation of each line within the task: 
 - ``name: ADD POOL MEMBERS`` is a user defined description that will display in the terminal output.
 - ``bigip_pool_member:`` tells the task which module to use.
@@ -271,3 +295,5 @@ information. Click on the Members tab in the middle to list all the
 Members.
 
 **You have finished this exercise.**
+
+

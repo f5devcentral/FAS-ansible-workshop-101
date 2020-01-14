@@ -482,4 +482,5 @@ Solution
 The finished Ansible Playbook is provided here for an Answer key. Click
 here: `bigip-error-handling.yml <https://github.com/f5alliances/ansible-use-cases-101/blob/master/2.2-error-handling/bigip-error-handling.yml>`__.
 
-**You have finished this exercise **
+**You have finished this exercise and Section 2.**
+

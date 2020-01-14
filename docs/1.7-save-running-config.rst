@@ -24,10 +24,10 @@ Using your text editor of choice create a new file called ``bigip-config.yml``.
 
 **Step 2**
 
-Enter the following play definition into ``bigip-virtual-server.yml``:
+Enter the following play definition into ``bigip-config.yml``:
 
-.. code:: yaml
-
+.. code-block:: yaml
+  
     ---
     - name: BIG-IP SETUP
       hosts: lb
@@ -49,29 +49,29 @@ Step 3
 Next, add the ``task``. This task will use the ``bigip-config`` to save
 the running configuration to disk
 
-.. code:: yaml
-
+.. code-block:: yaml
+  
     ---
     - name: BIG-IP SETUP
       hosts: lb
       connection: local
       gather_facts: false
-
+       
       tasks:
-
-	  - set_fact:
+    
+      - set_fact:
          provider:
           server: "{{private_ip}}"
           user: "{{ansible_user}}"
           password: "{{ansible_ssh_pass}}"
           server_port: 8443
           validate_certs: no
-      
-	  - name: SAVE RUNNING CONFIG ON BIG-IP
+          
+      - name: SAVE RUNNING CONFIG ON BIG-IP
         bigip_config:
-		  provider: "{{provider}}"
+          provider: "{{provider}}"
           save: yes
-
+	  
 -  ``name: SAVE RUNNING CONFIG ON BIG-IP`` is a user defined description
    that will display in the terminal output.
 -  ``bigip_config:`` tells the task which module to use.
@@ -109,6 +109,8 @@ Solution
 
 The finished Ansible Playbook is provided here for an Answer key. Click
 here:
-`bigip-config.yml <https://github.com/f5alliances/ansible-use-cases-101/blob/master/1.7-save-running-config/bigip-config.yml>`__.
+`bigip-config.yml <https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/1.7-save-running-config/bigip-config.yml>`__.
 
 **You have finished this exercise.**
+
+

@@ -1,38 +1,43 @@
-- name: BIG-IP TEARDOWN
-  hosts: lb
-  connection: local
-  gather_facts: false
+---
+# F5 Networks
+# Ansible 101 Workshop - https://github.com/f5devcentral/FAS-ansible-workshop-101
+# For more information on this class, please see the documentation
+# at https://clouddocs.f5.com/training/fas-ansible-workshop-101/
+  - name: BIG-IP TEARDOWN
+    hosts: lb
+    connection: local
+    gather_facts: false
 
-  vars_files:
-   virtuals_pools.yml
+    vars_files:
+     virtuals_pools.yml
 
-  tasks:
-  - name: Setup provider
-    set_fact:
-     provider:
-      server: "{{private_ip}}"
-      user: "{{ansible_user}}"
-      password: "{{ansible_ssh_pass}}"
-      server_port: "8443"
-      validate_certs: "no"
-      
-  - name: DELETE VIRTUAL SERVER
-    bigip_virtual_server:
-      provider: "{{provider}}"
-      name: "{{item.vs_name}}"
-      state: absent
-    loop: "{{vips_pools}}"
+    tasks:
+    - name: Setup provider
+      set_fact:
+      provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: "8443"
+        validate_certs: "no"
+        
+    - name: DELETE VIRTUAL SERVER
+      bigip_virtual_server:
+        provider: "{{provider}}"
+        name: "{{item.vs_name}}"
+        state: absent
+      loop: "{{vips_pools}}"
 
-  - name: DELETE POOL
-    bigip_pool:
-      provider: "{{provider}}"
-      name: "{{item.pool_name}}"
-      state: absent
-    loop: "{{vips_pools}}"
+    - name: DELETE POOL
+      bigip_pool:
+        provider: "{{provider}}"
+        name: "{{item.pool_name}}"
+        state: absent
+      loop: "{{vips_pools}}"
 
-  - name: DELETE NODES
-    bigip_node:
-      provider: "{{provider}}"
-      name: "{{hostvars[item].inventory_hostname}}"
-      state: absent
-    loop: "{{ groups['webservers'] }}"
+    - name: DELETE NODES
+      bigip_node:
+        provider: "{{provider}}"
+        name: "{{hostvars[item].inventory_hostname}}"
+        state: absent
+      loop: "{{ groups['webservers'] }}"

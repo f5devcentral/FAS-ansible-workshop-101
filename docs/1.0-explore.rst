@@ -60,7 +60,6 @@ Use the ``cat`` command to view the contents of the ``ansible.cfg`` file.
    timeout = 60
    inventory = /home/student1/networking-workshop/lab_inventory/hosts
    host_key_checking = False
-   private_key_file = /home/student1/.ssh/aws-private.pem
    [student1@ansible networking-workshop]$
 
 .. note::
@@ -131,10 +130,9 @@ for the host ``f5``:
 Does the password have to be in plain text? No, Red Hat Ansible Tower can take care of credential management in an easy to use web
 GUI or a user may use  `ansible-vault <https://docs.ansible.com/ansible/latest/network/getting_started/first_inventory.html#protecting-sensitive-variables-with-ansible-vault>`__
 
-Go back to the home directory
-
 .. code::
 
    [student1@ansible networking-workshop]$ cd ~
 
 **You have finished this exercise**
+

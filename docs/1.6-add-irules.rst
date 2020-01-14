@@ -25,13 +25,15 @@ Using your text editor of choice create a new file called ``bigip-irule.yml``.
 
 Enter the following play definition into ``bigip-irule.yml``:
 
-.. code:: yaml
+.. code-block:: yaml
 
-    ---
     - name: BIG-IP SETUP
       hosts: lb
       connection: local
       gather_facts: false
+    
+      vars:
+       irules: ['irule1','irule2']
 
 -  The ``---`` at the top of the file indicates that this is a YAML
    file.
@@ -70,34 +72,33 @@ Save the file
 
 Next, add the ``task``. This task will use the ``bigip-irule`` to add irules to the BIG-IP.
 
-.. code:: yaml
+.. code-block:: yaml
 
-    ---
     - name: BIG-IP SETUP
       hosts: lb
       connection: local
       gather_facts: false
-
+    
       vars:
        irules: ['irule1','irule2']
-
+       
       tasks:
-
+    
       - set_fact:
-		 provider:
-		  server: "{{private_ip}}"
-		  user: "{{ansible_user}}"
-		  password: "{{ansible_ssh_pass}}"
-		  server_port: 8443
-		  validate_certs: no
-		  
-	  - name: ADD iRules
-		bigip_irule:
-		  provider: "{{provider}}"
-		  module: "ltm"
-		  name: "{{item}}"
-		  content: "{{lookup('file','{{item}}')}}"
-		with_items: "{{irules}}"
+         provider:
+          server: "{{private_ip}}"
+          user: "{{ansible_user}}"
+          password: "{{ansible_ssh_pass}}"
+          server_port: 8443
+          validate_certs: no
+          
+      - name: ADD iRules
+        bigip_irule:
+          provider: "{{provider}}"
+          module: "ltm"
+          name: "{{item}}"
+          content: "{{lookup('file','{{item}}')}}"
+        with_items: "{{irules}}"
 		
 
 -  ``A variable 'irules'`` is a list defined with two irules => 'irule1'
@@ -121,13 +122,40 @@ Next, add the ``task``. This task will use the ``bigip-irule`` to add irules to 
 Next, add the ``task``. This task will use the ``bigip_virtual_server``
 to add attach the iRules to a Virtual Server on the BIG-IP.
 
-.. code:: yaml
-	  
-	- name: ATTACH iRules TO VIRTUAL SERVER
-	  bigip_virtual_server:
-	   provider: "{{provider}}"
-	   name: "vip"
-	   irules: "{{irules}}
+.. code-block:: yaml
+
+    - name: BIG-IP SETUP
+      hosts: lb
+      connection: local
+      gather_facts: false
+    
+      vars:
+       irules: ['irule1','irule2']
+       
+      tasks:
+    
+      - set_fact:
+         provider:
+          server: "{{private_ip}}"
+          user: "{{ansible_user}}"
+          password: "{{ansible_ssh_pass}}"
+          server_port: 8443
+          validate_certs: no
+          
+      - name: ADD iRules
+        bigip_irule:
+          provider: "{{provider}}"
+          module: "ltm"
+          name: "{{item}}"
+          content: "{{lookup('file','{{item}}')}}"
+        with_items: "{{irules}}"
+        
+      - name: ATTACH iRules TO VIRTUAL SERVER
+        bigip_virtual_server:
+          provider: "{{provider}}"
+          name: "vip"
+          irules: "{{irules}}"
+    
 
 
 -  ``irules: "{{irules}}`` is a list of irules to be attached to the virtual server 'irule1' and 'irule2'
@@ -190,3 +218,5 @@ click on the Virtual Server named 'vip' then click on the 'resources' tab and vi
 the iRules attached to the Virtual Server
 
 **You have finished this exercise.**
+
+

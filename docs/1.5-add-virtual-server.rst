@@ -27,16 +27,15 @@ Using your text editor of choice create a new file called ``bigip-virtual-server
 
 Enter the following play definition into ``bigip-virtual-server.yml``:
 
-.. code:: yaml
+.. code-block:: yaml
 
-    ---
-    - name: BIG-IP SETUP
-      hosts: lb
-      connection: local
-      gather_facts: false
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
 
-	  vars_files:
-       virtuals_pools.yml
+   vars_files:
+     virtuals_pools.yml
    
 -  The ``---`` at the top of the file indicates that this is a YAML
    file.
@@ -54,17 +53,25 @@ Next, add the first ``task``. This task will use the ``set_fact`` module to set 
 
 This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
-.. code:: yaml
+.. code-block:: yaml
+
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
+
+   vars_files:
+     virtuals_pools.yml
 
    tasks:
 
    - set_fact:
       provider:
-        server: "{{private_ip}}"
-        user: "{{ansible_user}}"
-        password: "{{ansible_ssh_pass}}"
-        server_port: 8443
-        validate_certs: no
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
 
 -  The ``server: "{{private_ip}}"`` parameter tells the module to
    connect to the F5 BIG-IP IP address, which is stored as a variable
@@ -81,20 +88,36 @@ This parameter will hold all the connection details to the BIG-IP and will be us
 Next, add the ``task``. This task will use the ``bigip-virtual-server``
 to configure a virtual server on the BIG-IP
 
-.. code:: yaml
+.. code-block:: yaml
+
+ - name: BIG-IP SETUP
+   hosts: lb
+   connection: local
+   gather_facts: false
+
+   vars_files:
+     virtuals_pools.yml
 
    tasks:
 
+   - set_fact:
+      provider:
+       server: "{{private_ip}}"
+       user: "{{ansible_user}}"
+       password: "{{ansible_ssh_pass}}"
+       server_port: 8443
+       validate_certs: no
+        
    - name: ADD VIRTUAL SERVER
      bigip_virtual_server:
-      provider: "{{provider}}"
-      name: "{{item.vs_name}}"
-      destination: "{{private_ip}}"
-      port: "{{item.port}}"
-      enabled_vlans: "all"
-      all_profiles: ['http','clientssl','oneconnect']
-      pool: "{{item.pool_name}}"
-      snat: "Automap"
+       provider: "{{provider}}"
+       name: "{{item.vs_name}}"
+       destination: "{{private_ip}}"
+       port: "{{item.port}}"
+       enabled_vlans: "all"
+       all_profiles: ['http','clientssl','oneconnect']
+       pool: "{{item.pool_name}}"
+       snat: "Automap"
      loop: "{{vips_pools}}"
 
    
@@ -215,3 +238,5 @@ student5 would ``| grep student5``)
        <p>F5TEST-studentX-host1</p>
 
 **You have finished this exercise.**
+
+

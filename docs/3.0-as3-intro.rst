@@ -275,3 +275,5 @@ lab_inventory/hosts file, and type it in like so: https://X.X.X.X:8443/
 Note that the Virtual Server is unavailable ('Red'), this is on purpose.
 
 **You have finished this exercise.**
+
+
