@@ -95,4 +95,3 @@ lab_inventory/hosts file, and type it in like so: https://X.X.X.X:8443/
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/3.2-as3-delete.rst>`_.
