@@ -440,4 +440,3 @@ here:
 
 **You have finished this exercise and Section 1.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/2.0-disable-pool-member.rst>`_.
