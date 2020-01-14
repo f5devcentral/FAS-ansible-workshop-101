@@ -192,4 +192,3 @@ deleted.
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/2.2-error-handling.rst>`_.
