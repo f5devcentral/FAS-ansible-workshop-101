@@ -484,4 +484,3 @@ here: `bigip-error-handling.yml <https://github.com/f5alliances/ansible-use-case
 
 **You have finished this exercise and Section 2.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/3.0-as3-intro.rst>`_.
