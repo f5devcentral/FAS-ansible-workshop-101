@@ -113,4 +113,4 @@ here:
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.8-virtual-server-facts.rst>`_.
+
