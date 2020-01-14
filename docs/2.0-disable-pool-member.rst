@@ -95,4 +95,4 @@ here: `disable-pool-member.yml <../2.0-disable-pool-member/disable-pool-member.y
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/2.1-delete-configuration.rst>`_.
+
