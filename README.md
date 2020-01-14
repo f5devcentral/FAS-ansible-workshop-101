@@ -39,25 +39,26 @@ Following topics will be covered
 
 ## Section 1 - Ansible F5 Basic Exercises
 
--  Exercise 1.0 - Exploring the lab environment
--  Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP 
--  Exercise 1.2 - Adding nodes to F5 BIG-IP
--  Exercise 1.3 - Adding a load balancing pool
--  Exercise 1.4 - Adding members to a pool
--  Exercise 1.5 - Adding a virtual server
--  Exercise 1.6 - Adding and attaching an iRule to a virtual server
--  Exercise 1.7 - Save the running configuration 
--  Exercise 1.8 - Virtual server facts 
+-  [Exercise 1.0 - Exploring the lab environment](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.0-explore.rst)
+-  [Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.1.get-facts.rst)
+-  [Exercise 1.2 - Adding nodes to F5 BIG-IP](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.2-add-node.rst)
+-  [Exercise 1.3 - Adding a load balancing pool](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.3-add-pool.rst)
+-  [Exercise 1.4 - Adding members to a pool](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.4-add-pool-members.rst)
+-  [Exercise 1.5 - Adding a virtual server](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.5-add-virtual-server.rst)
+-  [Exercise 1.6 - Adding and attaching an iRule to a virtual server](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.6-add-irules.rst)
+-  [Exercise 1.7 - Save the running configuration](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.7-save-running-config.rst) 
+-  [Exercise 1.8 - Virtual server facts](https://github.com/gwolfis/FAS-ansible-workshop-101/tree/master/docs/1.8-virtual-server-facts.rst)
 
 ## Section 2 - Ansible F5 Operational/Advanced Exercises
 
--  Exercise 2.0 - Disabling a pool member 
--  Exercise 2.1 - Deleting F5 BIG-IP Configuration
--  Exercise 2.2 - Error Handling 
+-  [Exercise 2.0 - Disabling a pool member](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.0-disable-pool-member.rst)
+-  [Exercise 2.1 - Deleting F5 BIG-IP Configuration](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.1-delete-configuration.rst)
+-  [Exercise 2.2 - Error Handling](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/2.2-error-handling.rst) 
 
 ## Section 3 - Ansible F5 AS3 Exercises
 
--  Exercise 3.0 - Intro to AS3
--  Exercise 3.1 - Operational Change with AS3 
--  Exercise 3.2 - Deleting a Web Application 
--  Exercise 3.3 - Deploying WAF through AS3
+-  [Exercise 3.0 - Intro to AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.0-as3-intro.rst)
+-  [Exercise 3.1 - Operational Change with AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.1-as3-change.rst) 
+-  [Exercise 3.2 - Deleting a Web Application](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.2-as3-delete.rst) 
+-  [Exercise 3.3 - Deploying WAF through AS3](https://github.com/gwolfis/FAS-ansible-workshop-101/blob/master/docs/3.3-as3-asm.rst)
+

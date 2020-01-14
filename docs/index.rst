@@ -51,30 +51,30 @@ Following topics will be covered:
 Section 1 - Ansible F5 Basic Exercises
 --------------------------------------
 
--  Exercise 1.0 - Exploring the lab environment
--  Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP 
--  Exercise 1.2 - Adding nodes to F5 BIG-IP
--  Exercise 1.3 - Adding a load balancing pool
--  Exercise 1.4 - Adding members to a pool
--  Exercise 1.5 - Adding a virtual server
--  Exercise 1.6 - Adding and attaching an iRule to a virtual server
--  Exercise 1.7 - Save the running configuration 
--  Exercise 1.8 - Virtual server facts 
+-  `Exercise 1.0 - Exploring the lab environment <../docs/1.0-explore.rst>`_
+-  `Exercise 1.1 - Using Ansible to gather data from F5 BIG-IP <../docs/1.1.get-facts.rst>`_
+-  `Exercise 1.2 - Adding nodes to F5 BIG-IP <../docs/1.2-add-node.rst>`_
+-  `Exercise 1.3 - Adding a load balancing pool <../docs/1.3-add-pool.rst>`_
+-  `Exercise 1.4 - Adding members to a pool <../docs/1.4-add-pool-members.rst>`_
+-  `Exercise 1.5 - Adding a virtual server <../docs/1.5-add-virtual-server.rst>`_
+-  `Exercise 1.6 - Adding and attaching an iRule to a virtual server <../docs/1.6-add-irules.rst>`_
+-  `Exercise 1.7 - Save the running configuration <../docs/1.7-save-running-config.rst>`_
+-  `Exercise 1.8 - Virtual server facts <../docs/1.8-virtual-server-facts.rst>`_
 
 Section 2 - Ansible F5 Operational/Advanced Exercises
 -----------------------------------------------------
 
--  Exercise 2.0 - Disabling a pool member 
--  Exercise 2.1 - Deleting F5 BIG-IP Configuration
--  Exercise 2.2 - Error Handling 
+-  `Exercise 2.0 - Disabling a pool member <../docs/2.0-disable-pool-member.rst>`_
+-  `Exercise 2.1 - Deleting F5 BIG-IP Configuration <../docs/2.1-delete-configuration.rst>`_
+-  `Exercise 2.2 - Error Handling <../docs/2.2-error-handling.rst>`_
 
 Section 3 - Ansible F5 AS3 Exercises
 ------------------------------------
 
--  Exercise 3.0 - Intro to AS3
--  Exercise 3.1 - Operational Change with AS3 
--  Exercise 3.2 - Deleting a Web Application 
--  Exercise 3.3 - Deploying WAF through AS3
+-  `Exercise 3.0 - Intro to AS3 <../docs/3.0-as3-intro.rst>`_
+-  `Exercise 3.1 - Operational Change with AS3 <../docs/3.1-as3-change.rst>`_
+-  `Exercise 3.2 - Deleting a Web Application <../docs/3.2-as3-delete.rst>`_
+-  `Exercise 3.3 - Deploying WAF through AS3 <../docs/3.3-as3-asm.rst>`_
 
 
 .. toctree::

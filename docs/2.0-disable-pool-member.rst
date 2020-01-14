@@ -92,3 +92,7 @@ Solution
 --------
 The finished Ansible Playbook is provided here for an Answer key. Click
 here: `disable-pool-member.yml <../2.0-disable-pool-member/disable-pool-member.yml>`__.
+
+**You have finished this exercise.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/2.1-delete-configuration.rst>`_.
