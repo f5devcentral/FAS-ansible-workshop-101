@@ -438,4 +438,6 @@ The finished Ansible Playbook is provided here for an Answer key. Click
 here:
 `bigip-virtual-server-facts.yml <../1.8-virtual-server-facts/bigip-virtual-server-facts.yml>`__.
 
-**You have finished this exercise.**
+**You have finished this exercise and Section 1.**
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/2.0-disable-pool-member.rst>`_.

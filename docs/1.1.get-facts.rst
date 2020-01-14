@@ -38,13 +38,13 @@ JSON format).
 
 Enter the following play definition into ``bigip-facts.yml``:
 
-.. code:: yaml
+.. code-block:: yaml
 
-    ---
-    - name: GRAB F5 FACTS
-      hosts: f5
-      connection: local
-      gather_facts: no
+ ---
+ - name: GRAB F5 FACTS
+   hosts: f5
+   connection: local
+   gather_facts: no
 
 -  The ``---`` at the top of the file indicates that this is a YAML file.
 -  The ``hosts: f5``, indicates the play is run only on the F5 BIG-IP device
@@ -60,12 +60,18 @@ Next, add the first ``task``. This task will use the ``set_fact`` module to set 
 
 This parameter will hold all the connection details to the BIG-IP and will be used in subsequent tasks
 
-.. code:: yaml
+.. code-block:: yaml
+
+ ---
+ - name: GRAB F5 FACTS
+   hosts: f5
+   connection: local
+   gather_facts: no
 
    tasks:
-
-   - set_fact:
-      provider:
+  
+    - set_fact:
+       provider:
         server: "{{private_ip}}"
         user: "{{ansible_user}}"
         password: "{{ansible_ssh_pass}}"
@@ -86,14 +92,31 @@ This parameter will hold all the connection details to the BIG-IP and will be us
 
 Next, add another``task``. This task will use the device info module to gather facts are the F5 device
 
-.. code:: yaml
-   
-   - name: COLLECT BIG-IP FACTS
-     bigip_device_info:
-       gather_subset:
-        - system-info
-       provider: "{{provider}}"
-     register: device_facts
+.. code-block:: yaml
+
+ ---
+ - name: GRAB F5 FACTS
+   hosts: f5
+   connection: local
+   gather_facts: no
+
+   tasks:
+  
+    - set_fact:
+       provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+    - name: COLLECT BIG-IP FACTS
+      bigip_device_info:
+        gather_subset:
+         - system-info
+        provider: "{{provider}}"
+      register: device_facts
+
 
 -  ``name: COLLECT BIG-IP FACTS`` is a user defined description that
    will display in the terminal output.
@@ -112,11 +135,34 @@ to print the output from device_facts variable we registered the facts
 to.
 
 
-.. code:: yaml
+.. code-block:: yaml
 
-   - name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
-     debug:
-       var: device_facts
+ ---
+ - name: GRAB F5 FACTS
+   hosts: f5
+   connection: local
+   gather_facts: no
+
+   tasks:
+  
+    - set_fact:
+       provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+    - name: COLLECT BIG-IP FACTS
+      bigip_device_info:
+        gather_subset:
+         - system-info
+        provider: "{{provider}}"
+      register: device_facts
+
+    - name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
+      debug:
+        var: device_facts
 
 
 -  The ``name: COMPLETE BIG-IP SYSTEM INFORMATION`` is a user defined
@@ -137,15 +183,43 @@ Run the playbook - exit back into the command line of the control host and execu
 
 Finally lets add two more tasks to get more specific info from facts gathered.
 
-.. code:: yaml
+.. code-block:: yaml
 
-   - name: DISPLAY ONLY THE MAC ADDRESS
-     debug:
-      var: device_facts['system_info']['base_mac_address']
+ ---
+ - name: GRAB F5 FACTS
+   hosts: f5
+   connection: local
+   gather_facts: no
 
-   - name: DISPLAY ONLY THE VERSION
-     debug:
-      var: device_facts['system_info']['product_version']
+   tasks:
+  
+    - set_fact:
+       provider:
+        server: "{{private_ip}}"
+        user: "{{ansible_user}}"
+        password: "{{ansible_ssh_pass}}"
+        server_port: 8443
+        validate_certs: no
+
+    - name: COLLECT BIG-IP FACTS
+      bigip_device_info:
+        gather_subset:
+         - system-info
+        provider: "{{provider}}"
+      register: device_facts
+
+    - name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
+      debug:
+        var: device_facts
+
+    - name: DISPLAY ONLY THE MAC ADDRESS
+      debug:
+        var: device_facts['system_info']['base_mac_address']
+
+    - name: DISPLAY ONLY THE VERSION
+      debug:
+        var: device_facts['system_info']['product_version']
+
 
 
 -  ``var: device_facts['system_info']['base_mac_address']`` displays the MAC address for the BIG-IP device
@@ -264,11 +338,11 @@ Going Further
 For this bonus exercise add the ``tags: debug`` paramteter (at the task level) to the existing debug task.
 
 .. code:: yaml
-
+  
    - name: DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION
-     debug:
-       var: device_facts
-     tags: debug
+      debug:
+        var: device_facts
+      tags: debug
 
 Now re-run the playbook with the ``--skip-tags-debug`` command line option.
 
@@ -279,3 +353,6 @@ Now re-run the playbook with the ``--skip-tags-debug`` command line option.
 The Ansible Playbook will only run three tasks, skipping the ``DISPLAY COMPLETE BIG-IP SYSTEM INFORMATION`` task.
 
 **You have finished this exercise.**
+
+
+Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.2-add-node.rst>`_
