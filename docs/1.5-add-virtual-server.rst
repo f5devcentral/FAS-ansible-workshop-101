@@ -239,4 +239,4 @@ student5 would ``| grep student5``)
 
 **You have finished this exercise.**
 
-Go back to the `home directory <../docs/index.rst>`_ or go `next <../docs/1.6-add-irules.rst>`_.
+
