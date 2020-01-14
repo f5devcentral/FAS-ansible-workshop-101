@@ -226,4 +226,4 @@ lab_inventory/hosts file, and type it in like so: https://X.X.X.X:8443/
 
 **You have finished this exercise, section 3 and made it tyo the end of FAS-ansible-workshop-101!.**
 
-Go back to the `home directory <../docs/index.rst>`_.
+
